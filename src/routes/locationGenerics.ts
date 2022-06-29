@@ -1,6 +1,10 @@
 import { CellSelectionType } from "@/components/Table/types";
+import { OrderByValidator } from "@/validators/TableDataInput";
+import { GridSelection } from "@glideapps/glide-data-grid";
 import { MakeGenerics } from "@tanstack/react-location";
-import { RowSelectionState } from "@tanstack/react-table";
+import { z } from "zod";
+
+export type RowSelection = [number, number][] | [];
 
 export type LocationGenerics = MakeGenerics<{
   Search: {
@@ -8,7 +12,9 @@ export type LocationGenerics = MakeGenerics<{
     table?: string;
     limit?: number;
     offset?: number;
-    rowSelection?: RowSelectionState;
+    orderBy?: z.infer<typeof OrderByValidator>;
+    rowSelection?: RowSelection;
     cellSelection?: CellSelectionType;
+    gridSelection?: GridSelection;
   };
 }>;

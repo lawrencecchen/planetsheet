@@ -61,13 +61,11 @@ export default function LeftPanel(props: {
                                 key={`${table.table_schema}.${table.table_name}`}
                               >
                                 <Link
-                                  to="."
                                   search={{
                                     schema: table.table_schema,
                                     table: table.table_name,
                                   }}
                                   draggable={false}
-                                  preload={2000}
                                   className={clsx(
                                     "flex items-center w-full px-3 cursor-default py-0.5 group pl-7",
                                     {

@@ -3,11 +3,22 @@ import { getBaseUrl } from "@/utils/trpc";
 import { withTRPC } from "@trpc/next";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
-// import "../styles/test.css";
 import "../styles/uno.css";
+import superjson from "superjson";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"
+        />
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 // export default MyApp;
@@ -27,6 +38,7 @@ export default withTRPC<AppRouter>({
        * @link https://react-query.tanstack.com/reference/QueryClient
        */
       // queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
+      transformer: superjson,
     };
   },
   /**

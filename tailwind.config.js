@@ -5,7 +5,9 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: require('./tailwind-radix-colors.js')
+    },
   },
   plugins: [
     // require('@tailwindcss/forms'),

@@ -1,11 +1,40 @@
+import { TableDataInputValidator } from "@/validators/TableDataInput";
 import * as trpc from "@trpc/server";
+import { inferProcedureOutput } from "@trpc/server";
+import { groupBy } from "lodash";
+import superjson from "superjson";
 import { z } from "zod";
 import { pg } from "../utils/pg";
-import { groupBy } from "lodash";
-import { inferProcedureOutput } from "@trpc/server";
+
+async function getColumns(input: { table_schema: string; table_name: string }) {
+  type InformationSchemaColumns = {
+    table_schema: string;
+    table_name: string;
+    column_name: string;
+    column_default: string;
+    data_type: string;
+    is_nullable: string;
+    ordinal_position: string;
+  };
+  return pg<InformationSchemaColumns>("information_schema.columns")
+    .select([
+      "table_schema",
+      "table_name",
+      "column_name",
+      "column_default",
+      "data_type",
+      "is_nullable",
+      "ordinal_position",
+    ])
+    .where({
+      table_schema: input.table_schema,
+      table_name: input.table_name,
+    });
+}
 
 export const appRouter = trpc
   .router()
+  .transformer(superjson)
   .query("getUser", {
     input: (val: unknown) => {
       if (typeof val === "string") return val;
@@ -50,52 +79,81 @@ export const appRouter = trpc
       table_schema: z.string().min(1),
     }),
     async resolve({ input }) {
-      type InformationSchemaColumns = {
-        table_schema: string;
-        table_name: string;
-        column_name: string;
-        data_type: string;
-        is_nullable: string;
-        ordinal_position: string;
-      };
-      return pg<InformationSchemaColumns>("information_schema.columns")
-        .select([
-          "table_schema",
-          "table_name",
-          "column_name",
-          "data_type",
-          "is_nullable",
-          "ordinal_position",
-        ])
-        .where({
-          table_schema: input.table_schema,
-          table_name: input.table_name,
-        });
+      return getColumns({
+        table_schema: input.table_schema,
+        table_name: input.table_name,
+      });
     },
   })
   .query("tableData", {
-    input: z.object({
-      table_name: z.string().min(1),
-      table_schema: z.string().min(1),
-      limit: z.number().default(300),
-      offset: z.number().default(0),
-    }),
+    input: TableDataInputValidator,
     async resolve({ input }) {
-      return pg(input.table_name)
+      let baseQuery = pg(input.table_name)
         .select()
         .limit(input.limit)
         .offset(input.offset);
+      if (input.orderBy) {
+        baseQuery = baseQuery.orderBy(input.orderBy);
+      }
+      return baseQuery;
     },
   })
-  .mutation("createUser", {
-    // validate input with Zod
-    input: z.object({ name: z.string().min(5) }),
-    async resolve(req) {
-      // use your ORM of choice
-      // return await UserModel.create({
-      //   data: req.input,
-      // });
-      return {};
+  .mutation("editCell", {
+    input: z.object({
+      table_name: z.string().min(1),
+      table_schema: z.string().min(1),
+      identifier_column: z.string().min(1),
+      identifier_value: z.string().min(1),
+      column: z.string().min(1),
+      value: z
+        .union([
+          z.string(),
+          z.number(),
+          z.boolean(),
+          z.array(z.string()),
+          z.object({}),
+        ])
+        .nullish(),
+    }),
+    async resolve({ input }) {
+      return pg(input.table_schema + "." + input.table_name)
+        .where(input.identifier_column, "=", input.identifier_value)
+        .update({
+          [input.column]: input.value,
+        });
+    },
+  })
+  .mutation("addRows", {
+    input: z.object({
+      table_name: z.string().min(1),
+      table_schema: z.string().min(1),
+      rows: z.array(z.unknown()),
+    }),
+    async resolve({ input }) {
+      const columns = await getColumns({
+        table_name: input.table_name,
+        table_schema: input.table_schema,
+      });
+      console.log(columns);
+      const formattedRows = input.rows.map((row: any) => {
+        const formattedRow = {} as Record<string, any>;
+        for (const column of columns) {
+          const value = row[column.column_name];
+          if (column.column_default === value) {
+            // delete formattedRow[column.column_name];
+            continue;
+          }
+          if (column.is_nullable === "YES" && value.length === 0) {
+            continue;
+          }
+          formattedRow[column.column_name] = value;
+        }
+        return formattedRow;
+      });
+      console.log(formattedRows);
+      return pg(input.table_schema + "." + input.table_name).insert(
+        formattedRows
+      );
     },
   });
 
