@@ -9,7 +9,6 @@ const Home: NextPage = () => {
         <meta name="description" content="amazing sql editor." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="">home</div>
     </div>
   );
 };

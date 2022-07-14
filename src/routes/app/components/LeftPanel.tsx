@@ -31,7 +31,7 @@ export default function LeftPanel(props: {
               </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content className="">
-              <ul className="">
+              <ul className="pb-4">
                 <Accordion.Root
                   type="multiple"
                   defaultValue={[search.schema ?? sortedSchemas[0]?.[0]]}

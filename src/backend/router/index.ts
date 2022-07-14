@@ -88,7 +88,7 @@ export const appRouter = trpc
   .query("tableData", {
     input: TableDataInputValidator,
     async resolve({ input }) {
-      let baseQuery = pg(input.table_name)
+      let baseQuery = pg(input.table_schema + "." + input.table_name)
         .select()
         .limit(input.limit)
         .offset(input.offset);

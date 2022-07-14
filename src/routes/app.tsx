@@ -1,22 +1,13 @@
-import { Link, Outlet } from "@tanstack/react-location";
 import DbRoute from "@/routes/app/db";
 import TableRoute from "@/routes/app/db/TableRoute";
 import { LocationGenerics } from "@/routes/locationGenerics";
 import { trpc } from "@/utils/trpc";
-import { ReactLocation, Router, useNavigate } from "@tanstack/react-location";
+import { ReactLocation, Router } from "@tanstack/react-location";
 import type { NextPage } from "next";
 import Head from "next/head";
+import Empty from "./app/db/Empty";
 import { Sheet } from "./sheet";
 
-function AppRoute() {
-  return (
-    <div>
-      app
-      <Link to="test-db">open test database</Link>
-      <Outlet />
-    </div>
-  );
-}
 const location = new ReactLocation<LocationGenerics>();
 
 const App: NextPage = () => {
@@ -45,6 +36,13 @@ const App: NextPage = () => {
             },
             children: [
               {
+                id: "db-empty",
+                path: "/",
+                search: (search) => !search.schema && !search.table,
+                element: <Empty />,
+              },
+              {
+                id: "db-table",
                 path: "/",
                 search: (search) => search.schema && search.table,
                 element: <TableRoute />,
@@ -71,10 +69,6 @@ const App: NextPage = () => {
                 },
               },
             ],
-          },
-          {
-            path: "app",
-            element: <AppRoute />,
           },
         ]}
       />

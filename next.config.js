@@ -5,11 +5,25 @@ const nextConfig = {
     return [
       // Rewrite everything else to use `pages/index`
       {
-        source: '/app/:path*',
-        destination: '/app',
+        source: "/app/:path*",
+        destination: "/app",
       },
     ];
   },
-}
+  redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/app/db",
+        permanent: true,
+      },
+      {
+        source: "/app",
+        destination: "/app/db",
+        permanent: true,
+      },
+    ];
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
