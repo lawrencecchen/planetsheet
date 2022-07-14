@@ -2,12 +2,11 @@
 
 const path = require("path");
 const fs = require("fs");
-const { spawn } = require("child_process");
 
 console.log(`Planetsheet v${require("../package.json").version}`);
-require("dotenv").config();
 const cliDir = path.dirname(fs.realpathSync(__filename));
 
+require("dotenv").config();
 function assertConnectionString() {
   const searchEnvVars = ["DATABASE_URL", "PG_CONNECTION_STRING"];
   for (const envVar of searchEnvVars) {
