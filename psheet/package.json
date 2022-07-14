@@ -1,6 +1,6 @@
 {
   "name": "psheet",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "The most user friendly database tool.",
   "scripts": {},
   "dependencies": {
@@ -15,7 +15,7 @@
   "files": [
     "dist/"
   ],
-  "bin": "NODE_ENV=production dist/cli.js",
+  "bin": "dist/cli.js",
   "author": "Lawrence Chen",
   "license": "MIT",
   "engines": {

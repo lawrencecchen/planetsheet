@@ -1,6 +1,6 @@
 {
   "name": "planetsheet",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "The most user friendly database tool.",
   "keywords": [
     "postgres",

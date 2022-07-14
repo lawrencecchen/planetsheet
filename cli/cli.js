@@ -10,6 +10,9 @@ const { parse } = require("url");
 const next = require("next");
 require("dotenv").config();
 
+// Force production to make Next.js happy.
+process.env.NODE_ENV = "production";
+
 const argv = require("minimist")(process.argv.slice(2));
 const cliDir = path.dirname(fs.realpathSync(__filename));
 const dir = argv.dir || cliDir;
@@ -34,7 +37,7 @@ assertConnectionString();
 const hostname = "localhost";
 const port = 58337;
 // when using middleware `hostname` and `port` must be provided below
-const app = next({ hostname, port, dir });
+const app = next({ hostname, port, dir, dev: false });
 const handle = app.getRequestHandler();
 
 app
