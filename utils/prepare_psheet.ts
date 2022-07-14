@@ -14,9 +14,9 @@ if (!existsSync(nextAppDir)) {
 fse.copySync(nextAppDir, targetAppDir);
 
 const cliDir = path.resolve("./cli");
-const psheetDir = path.resolve("./psheet/cli");
+const distDir = path.resolve("./psheet/dist");
 
-fse.copySync(cliDir, psheetDir);
+fse.copySync(cliDir, distDir);
 
 const planetsheetVersion = planetsheetPackageJson.version;
 const planetsheetNextVersion = planetsheetPackageJson.dependencies["next"];

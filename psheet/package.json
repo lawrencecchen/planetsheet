@@ -1,8 +1,8 @@
 {
   "name": "psheet",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A cli/web app to manage your database.",
-  "main": "./cli/cli.js",
+  "main": "./dist/cli.js",
   "scripts": {},
   "dependencies": {
     "next": "12.2.2"
@@ -12,9 +12,9 @@
     "mysql"
   ],
   "files": [
-    "cli"
+    "dist"
   ],
-  "bin": "./cli/cli.js",
+  "bin": "./dist/cli.js --dir=dist",
   "author": "Lawrence Chen",
   "license": "MIT"
 }
