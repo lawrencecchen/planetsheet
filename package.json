@@ -1,6 +1,6 @@
 {
   "name": "planetsheet",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A cli/web app to manage your database.",
   "keywords": [
     "postgres",
@@ -13,13 +13,15 @@
     "build": "run-s build:*",
     "build:unocss": "npm run generate:unocss",
     "build:next": "next build",
-    "build:create_executable": "tsx ./cli/utils/create_executable.ts",
+    "build:prepare_psheet": "tsx ./utils/prepare_psheet.ts",
     "start": "next start -p 54337",
     "lint": "next lint",
     "generate:unocss": "unocss \"./src/**/*.{ts,tsx,jsx,js}\" --out-file ./styles/uno.css",
     "typecheck": "tsc -b",
     "prettier": "prettier --write app",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepublishOnly": "npm run lint && npm run build",
+    "postpublish": "cd psheet && npm publish"
   },
   "dependencies": {
     "@faker-js/faker": "^7.3.0",
@@ -92,9 +94,5 @@
     "npm": ">=7.0.0",
     "node": ">=16.0.0"
   },
-  "bin": "./cli/cli.js",
-  "license": "MIT",
-  "files": [
-    "cli"
-  ]
+  "license": "MIT"
 }

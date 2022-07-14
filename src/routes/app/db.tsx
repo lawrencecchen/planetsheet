@@ -1,4 +1,3 @@
-import RightPanel from "@/components/RightPanel";
 import { trpc } from "@/utils/trpc";
 import { Outlet } from "@tanstack/react-location";
 import LeftPanel from "./components/LeftPanel";
