@@ -1,7 +1,7 @@
 {
   "name": "planetsheet",
-  "version": "0.1.5",
-  "description": "A cli/web app to manage your database.",
+  "version": "0.1.6",
+  "description": "The most user friendly database tool.",
   "keywords": [
     "postgres",
     "mysql"

@@ -2,8 +2,9 @@
 
 console.log(`Planetsheet v${require("../package.json").version}`);
 
-const argv = require("minimist")(process.argv.slice(2));
-const dir = argv.dir || ".";
+// const argv = require("minimist")(process.argv.slice(2));
+// const dir = argv.dir || "dist";
+const dir = "dist";
 
 const { createServer } = require("http");
 const { parse } = require("url");
