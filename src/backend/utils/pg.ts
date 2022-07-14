@@ -1,6 +1,8 @@
 import knex from "knex";
+import dotenv from "dotenv";
 
 function getConnectionString() {
+  dotenv.config();
   const searchEnvVars = ["DATABASE_URL", "PG_CONNECTION_STRING"];
   for (const envVar of searchEnvVars) {
     if (process.env[envVar]) {
