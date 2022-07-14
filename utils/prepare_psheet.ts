@@ -1,5 +1,6 @@
 import fse, { existsSync } from "fs-extra";
 import path from "node:path";
+import planetsheetPackageJson from "../package.json";
 
 const nextAppDir = path.resolve(".next");
 const targetAppDir = path.resolve("./cli/.next");
@@ -17,10 +18,13 @@ const psheetDir = path.resolve("./psheet/cli");
 
 fse.copySync(cliDir, psheetDir);
 
-const planetsheetVersion = require("../package.json").version;
+const planetsheetVersion = planetsheetPackageJson.version;
+const planetsheetNextVersion = planetsheetPackageJson.dependencies["next"];
+
 const psheetPackageJson = path.resolve("./psheet/package.json");
 const psheetPackageJsonContent = fse.readJsonSync(psheetPackageJson);
 psheetPackageJsonContent.version = planetsheetVersion;
+psheetPackageJsonContent.dependencies["next"] = planetsheetNextVersion;
 fse.writeJsonSync(psheetPackageJson, psheetPackageJsonContent, { spaces: 2 });
 
 console.log("Done!");
