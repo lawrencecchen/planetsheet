@@ -1,9 +1,8 @@
 import fse, { existsSync } from "fs-extra";
 import path from "node:path";
 import planetsheetPackageJson from "../package.json";
-import "dotenv/config";
 
-const psheetDeps = ["next", "dotenv"];
+const psheetDeps = ["next", "dotenv", "minimist"];
 
 const nextAppDir = path.resolve(".next");
 const targetAppDir = path.resolve("./cli/.next");

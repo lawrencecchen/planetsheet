@@ -2,19 +2,13 @@
 
 console.log(`Planetsheet v${require("../package.json").version}`);
 
-// const argv = require("minimist")(process.argv.slice(2));
-// const dir = argv.dir || "dist";
-const dir = "dist";
-
 const { createServer } = require("http");
 const { parse } = require("url");
 const next = require("next");
+require("dotenv").config();
 
-const hostname = "localhost";
-const port = 58337;
-// when using middleware `hostname` and `port` must be provided below
-const app = next({ hostname, port, dir });
-const handle = app.getRequestHandler();
+const argv = require("minimist")(process.argv.slice(2));
+const dir = argv.dir || "dist";
 
 function assertConnectionString() {
   const searchEnvVars = ["DATABASE_URL", "PG_CONNECTION_STRING"];
@@ -33,6 +27,12 @@ function assertConnectionString() {
 }
 
 assertConnectionString();
+
+const hostname = "localhost";
+const port = 58337;
+// when using middleware `hostname` and `port` must be provided below
+const app = next({ hostname, port, dir });
+const handle = app.getRequestHandler();
 
 app
   .prepare()
