@@ -29,7 +29,9 @@ psheetPackageJsonContent.version = planetsheetVersion;
 
 // Write required dependencies to psheet package.json
 for (const dep of psheetDeps) {
-  const depVersion = planetsheetPackageJson.dependencies[dep];
+  const depVersion =
+    planetsheetPackageJson.dependencies[dep] ||
+    planetsheetPackageJson.devDependencies[dep];
   psheetPackageJsonContent.dependencies[dep] = depVersion;
 }
 

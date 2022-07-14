@@ -78,7 +78,6 @@ dependencies:
   clsx: 1.2.1
   cuid: 2.1.8
   date-fns: 2.28.0
-  dotenv: 16.0.1
   framer-motion: 6.5.0_biqbaboplfbrettd7655fr4n2y
   fuse.js: 6.6.2
   immer: 9.0.15
@@ -106,6 +105,7 @@ devDependencies:
   '@unocss/cli': 0.44.1
   '@unocss/preset-icons': 0.44.1
   autoprefixer: 10.4.7_postcss@8.4.14
+  dotenv: 16.0.1
   eslint: 8.19.0
   eslint-config-next: 12.2.2_4x5o4skxv6sl53vpwefgt23khm
   fs-extra: 10.1.0
@@ -1679,7 +1679,7 @@ packages:
   /dotenv/16.0.1:
     resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
     engines: {node: '>=12'}
-    dev: false
+    dev: true
 
   /duplexer/0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}

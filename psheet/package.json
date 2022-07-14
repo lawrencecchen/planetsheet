@@ -1,11 +1,12 @@
 {
   "name": "psheet",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "The most user friendly database tool.",
   "scripts": {},
   "dependencies": {
     "next": "12.2.2",
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "minimist": "^1.2.6"
   },
   "keywords": [
     "postgres",
