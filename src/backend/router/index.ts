@@ -1,7 +1,7 @@
 import { TableDataInputValidator } from "@/validators/TableDataInput";
 import * as trpc from "@trpc/server";
 import { inferProcedureOutput } from "@trpc/server";
-import { groupBy } from "lodash";
+import { groupBy } from "lodash-es";
 import superjson from "superjson";
 import { z } from "zod";
 import { pg } from "../utils/pg";

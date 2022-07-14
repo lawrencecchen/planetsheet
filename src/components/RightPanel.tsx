@@ -6,7 +6,7 @@ import { ArrayElementType } from "@/utils/types";
 import { TableDataInputValidator } from "@/validators/TableDataInput";
 import { useNavigate, useSearch } from "@tanstack/react-location";
 import { format } from "date-fns";
-import { debounce, DebouncedFunc } from "lodash";
+import { debounce, type DebouncedFunc } from "lodash-es";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 function DynamicInputField(props: {

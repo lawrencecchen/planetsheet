@@ -4,7 +4,6 @@ function getConnectionString() {
   const searchEnvVars = ["DATABASE_URL", "PG_CONNECTION_STRING"];
   for (const envVar of searchEnvVars) {
     if (process.env[envVar]) {
-      console.log(`Using ${envVar}`);
       return process.env[envVar];
     }
   }

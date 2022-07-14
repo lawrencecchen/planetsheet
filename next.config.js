@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  output: "standalone",
   async rewrites() {
     return [
       // Rewrite everything else to use `pages/index`
