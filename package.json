@@ -1,6 +1,6 @@
 {
   "name": "planetsheet",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A cli/web app to manage your database.",
   "keywords": [
     "postgres",
