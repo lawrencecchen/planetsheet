@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@faker-js/faker': ^7.3.0
   '@glideapps/glide-data-grid': ^4.2.0
   '@iconify/json': ^2.1.68
   '@radix-ui/colors': ^0.1.8
@@ -55,6 +56,7 @@ specifiers:
   zod: ^3.17.3
 
 dependencies:
+  '@faker-js/faker': 7.3.0
   '@glideapps/glide-data-grid': 4.2.0_zpc5pdm757yoexowec4lzgg7bu
   '@iconify/json': 2.1.68
   '@radix-ui/colors': 0.1.8
@@ -108,7 +110,7 @@ devDependencies:
   styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
   tailwindcss: 3.1.4
   typescript: 4.7.4
-  unocss: 0.41.1_vite@2.9.13
+  unocss: 0.41.1
 
 packages:
 
@@ -275,6 +277,11 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@faker-js/faker/7.3.0:
+    resolution: {integrity: sha512-1W0PZezq2rxlAssoWemi9gFRD8IQxvf0FPL5Km3TOmGHFG7ib0TbFBJ0yC7D/1NsxunjNTK6WjUXV8ao/mKZ5w==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    dev: false
 
   /@glideapps/glide-data-grid/4.2.0_zpc5pdm757yoexowec4lzgg7bu:
     resolution: {integrity: sha512-zVqS5Z+mqAax7m4h3l8PEvlhrEFMFiXNDYeVj000J+9iPGpG7PEQb0in5h+OgyQ3aaoA3eAC1pjPGpTHOGQCQQ==}
@@ -4076,7 +4083,7 @@ packages:
       detect-node: 2.1.0
     dev: false
 
-  /unocss/0.41.1_vite@2.9.13:
+  /unocss/0.41.1:
     resolution: {integrity: sha512-tsc/4Xw3Z6t4pda0KmEK2+XayZYgLhPypZHWfPjQofTWzkm43c+k3PO5vS72jEVorE8rK0VDcoRSvhKGvC5lww==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -4100,9 +4107,12 @@ packages:
       '@unocss/transformer-directives': 0.41.1
       '@unocss/transformer-variant-group': 0.41.1
       '@unocss/vite': 0.41.1_vite@2.9.13
+      vite: 2.9.13
     transitivePeerDependencies:
+      - less
+      - sass
+      - stylus
       - supports-color
-      - vite
     dev: true
 
   /uri-js/4.4.1:

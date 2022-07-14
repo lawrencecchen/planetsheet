@@ -6,6 +6,7 @@ import { trpc } from "@/utils/trpc";
 import { ReactLocation, Router, useNavigate } from "@tanstack/react-location";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { Sheet } from "./sheet";
 
 function AppRoute() {
   return (
@@ -31,6 +32,10 @@ const App: NextPage = () => {
       <Router
         location={location}
         routes={[
+          {
+            path: "app/sheet",
+            element: <Sheet />,
+          },
           {
             path: "app/:db",
             element: <DbRoute />,

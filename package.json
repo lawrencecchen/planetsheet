@@ -17,6 +17,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@faker-js/faker": "^7.3.0",
     "@glideapps/glide-data-grid": "^4.2.0",
     "@iconify/json": "^2.1.68",
     "@radix-ui/colors": "^0.1.8",

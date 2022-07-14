@@ -14,7 +14,7 @@ import DataEditor, {
 } from "@glideapps/glide-data-grid";
 import { gray, yellow } from "@radix-ui/colors";
 import { useNavigate, useSearch } from "@tanstack/react-location";
-import { format } from "date-fns";
+import { format, isDate } from "date-fns";
 import produce from "immer";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ThemeProvider } from "styled-components";
@@ -119,7 +119,12 @@ function GlideTable(props: {
   const navigate = useNavigate();
   const utils = trpc.useContext();
   const editCellMutation = trpc.useMutation("editCell");
-  const addRowsMutation = trpc.useMutation("addRows");
+  const addRowsMutation = trpc.useMutation("addRows", {
+    onSuccess: () => {
+      return utils.invalidateQueries(["tableData", props.metadata]);
+    },
+  });
+  // const {data: newRows} = trpc.useQuery([''])
   const [newRows, setNewRows] = useState<any[]>([]);
 
   async function saveChanges() {
@@ -250,7 +255,7 @@ function GlideTable(props: {
             allowOverlay: false,
             displayData:
               (isNewRow && column.column_default) ||
-              (d ? format(d, "yyyy-MM-dd HH:mm:ss") : ""),
+              (isDate(d) ? format(d, "yyyy-MM-dd HH:mm:ss") : ""),
             data: d,
             themeOverride,
           };
