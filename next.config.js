@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
   async rewrites() {
     return [
       // Rewrite everything else to use `pages/index`
@@ -21,6 +22,19 @@ const nextConfig = {
         source: "/app",
         destination: "/app/db",
         permanent: true,
+      },
+    ];
+  },
+  headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "x-frame-options",
+            value: "SAMEORIGIN",
+          },
+        ],
       },
     ];
   },

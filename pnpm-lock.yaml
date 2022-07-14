@@ -27,6 +27,7 @@ specifiers:
   clsx: ^1.2.1
   cuid: ^2.1.8
   date-fns: ^2.28.0
+  dotenv: ^16.0.1
   eslint: 8.19.0
   eslint-config-next: 12.2.2
   framer-motion: ^6.5.0
@@ -77,6 +78,7 @@ dependencies:
   clsx: 1.2.1
   cuid: 2.1.8
   date-fns: 2.28.0
+  dotenv: 16.0.1
   framer-motion: 6.5.0_biqbaboplfbrettd7655fr4n2y
   fuse.js: 6.6.2
   immer: 9.0.15
@@ -1673,6 +1675,11 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dotenv/16.0.1:
+    resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /duplexer/0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}

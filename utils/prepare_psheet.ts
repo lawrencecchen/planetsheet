@@ -1,6 +1,9 @@
 import fse, { existsSync } from "fs-extra";
 import path from "node:path";
 import planetsheetPackageJson from "../package.json";
+import "dotenv/config";
+
+const psheetDeps = ["next", "dotenv"];
 
 const nextAppDir = path.resolve(".next");
 const targetAppDir = path.resolve("./cli/.next");
@@ -19,12 +22,18 @@ const distDir = path.resolve("./psheet/dist");
 fse.copySync(cliDir, distDir);
 
 const planetsheetVersion = planetsheetPackageJson.version;
-const planetsheetNextVersion = planetsheetPackageJson.dependencies["next"];
-
 const psheetPackageJson = path.resolve("./psheet/package.json");
+
+// Update psheet package.json with the current version
 const psheetPackageJsonContent = fse.readJsonSync(psheetPackageJson);
 psheetPackageJsonContent.version = planetsheetVersion;
-psheetPackageJsonContent.dependencies["next"] = planetsheetNextVersion;
+
+// Write required dependencies to psheet package.json
+for (const dep of psheetDeps) {
+  const depVersion = planetsheetPackageJson.dependencies[dep];
+  psheetPackageJsonContent.dependencies[dep] = depVersion;
+}
+
 fse.writeJsonSync(psheetPackageJson, psheetPackageJsonContent, { spaces: 2 });
 
 console.log("Done!");
