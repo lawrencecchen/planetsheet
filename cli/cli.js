@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+const path = require("path");
+const fs = require("fs");
+
 console.log(`Planetsheet v${require("../package.json").version}`);
 
 const { createServer } = require("http");
@@ -8,7 +11,8 @@ const next = require("next");
 require("dotenv").config();
 
 const argv = require("minimist")(process.argv.slice(2));
-const dir = argv.dir || "dist";
+const cliDir = path.dirname(fs.realpathSync(__filename));
+const dir = argv.dir || cliDir;
 
 function assertConnectionString() {
   const searchEnvVars = ["DATABASE_URL", "PG_CONNECTION_STRING"];
@@ -27,7 +31,6 @@ function assertConnectionString() {
 }
 
 assertConnectionString();
-
 const hostname = "localhost";
 const port = 58337;
 // when using middleware `hostname` and `port` must be provided below
