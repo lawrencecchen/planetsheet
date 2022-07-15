@@ -4,33 +4,55 @@ import { inferProcedureOutput } from "@trpc/server";
 import { groupBy } from "lodash-es";
 import superjson from "superjson";
 import { z } from "zod";
-import { pg } from "../utils/pg";
+import { db } from "../utils/db";
+
+const ColumnValidator = z.object({
+  table_schema: z.string(),
+  table_name: z.string(),
+  column_name: z.string(),
+  column_default: z.string().nullish(),
+  data_type: z.string(),
+  is_nullable: z.string(),
+  ordinal_position: z.number(),
+});
+const ColumnsValidator = z.array(ColumnValidator);
+
+function asIdentity<T extends string>(str: T) {
+  return db.ref(str).as(str);
+}
 
 async function getColumns(input: { table_schema: string; table_name: string }) {
-  type InformationSchemaColumns = {
-    table_schema: string;
-    table_name: string;
-    column_name: string;
-    column_default: string;
-    data_type: string;
-    is_nullable: string;
-    ordinal_position: string;
-  };
-  return pg<InformationSchemaColumns>("information_schema.columns")
-    .select([
-      "table_schema",
-      "table_name",
-      "column_name",
-      "column_default",
-      "data_type",
-      "is_nullable",
-      "ordinal_position",
-    ])
+  // type InformationSchemaColumns = z.infer<typeof ColumnValidator>;
+  const unsafe_columns = await db("information_schema.columns")
+    .select(
+      [
+        "table_schema",
+        "table_name",
+        "column_name",
+        "column_default",
+        "data_type",
+        "is_nullable",
+        "ordinal_position",
+      ].map(asIdentity)
+    )
     .where({
       table_schema: input.table_schema,
       table_name: input.table_name,
     });
+
+  const result_1 = ColumnsValidator.safeParse(unsafe_columns);
+  if (result_1.success) {
+    return result_1.data;
+  }
+  const result_2 = ColumnsValidator.safeParse(unsafe_columns);
+  if (result_2.success) {
+    return result_2.data;
+  }
+
+  throw new Error("Invalid columns");
 }
+
+// function
 
 export const appRouter = trpc
   .router()
@@ -53,10 +75,10 @@ export const appRouter = trpc
         table_schema: string;
       };
       if (input?.schema) {
-        const tables = await pg<InformatonSchemaTables>(
+        const tables = await db<InformatonSchemaTables>(
           "information_schema.tables"
         )
-          .select(["table_schema", "table_name"])
+          .select([asIdentity("table_name"), asIdentity("table_schema")])
           .where({ table_schema: input.schema })
           .groupBy("table_schema")
           // .orderByRaw(
@@ -65,10 +87,10 @@ export const appRouter = trpc
           .orderBy("table_schema");
         return groupBy(tables, "table_schema");
       }
-      const tables = await pg<InformatonSchemaTables>(
+      const tables = await db<InformatonSchemaTables>(
         "information_schema.tables"
       )
-        .select(["table_schema", "table_name"])
+        .select([asIdentity("table_name"), asIdentity("table_schema")])
         .orderBy(["table_schema", "table_name"]);
       return groupBy(tables, "table_schema");
     },
@@ -88,7 +110,7 @@ export const appRouter = trpc
   .query("tableData", {
     input: TableDataInputValidator,
     async resolve({ input }) {
-      let baseQuery = pg(input.table_schema + "." + input.table_name)
+      let baseQuery = db(input.table_schema + "." + input.table_name)
         .select()
         .limit(input.limit)
         .offset(input.offset);
@@ -116,7 +138,7 @@ export const appRouter = trpc
         .nullish(),
     }),
     async resolve({ input }) {
-      return pg(input.table_schema + "." + input.table_name)
+      return db(input.table_schema + "." + input.table_name)
         .where(input.identifier_column, "=", input.identifier_value)
         .update({
           [input.column]: input.value,
@@ -134,7 +156,6 @@ export const appRouter = trpc
         table_name: input.table_name,
         table_schema: input.table_schema,
       });
-      console.log(columns);
       const formattedRows = input.rows.map((row: any) => {
         const formattedRow = {} as Record<string, any>;
         for (const column of columns) {
@@ -151,7 +172,7 @@ export const appRouter = trpc
         return formattedRow;
       });
       console.log(formattedRows);
-      return pg(input.table_schema + "." + input.table_name).insert(
+      return db(input.table_schema + "." + input.table_name).insert(
         formattedRows
       );
     },
