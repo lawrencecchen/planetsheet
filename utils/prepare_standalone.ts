@@ -25,7 +25,7 @@ async function main() {
     return true;
   };
   fse.copySync(nextStandaloneDir, distDir, { filter: filterFunc });
-  // By default, the standalone server does not copy the public or .next/static folders
+  // By default, the standalone server does not copy the public or .next/static folders (since they're supposed be served from a CDN). However, we want the entire application to be executable via `npx psheet`, so we have to include the static folders.
   // https://nextjs.org/docs/advanced-features/output-file-tracing
   fse.copySync(nextStaticDir, path.resolve(distDir, "public"));
   fse.copySync(nextStaticDir, path.resolve(distDir, ".next/static"));
@@ -34,7 +34,7 @@ async function main() {
     entryPoints: [cliFile],
     outfile: path.resolve(distDir, "cli.js"),
     bundle: true,
-    external: ["./node_modules/*"],
+    external: ["knex"],
     platform: "node",
     target: "node12",
     format: "cjs",

@@ -2,9 +2,45 @@
 
 A SQL editor designed for developers and content editors.
 
-Currently supports Postgres and MySql
+Today, Planetsheet is an alternative to `npx prisma studio`, Postico, and TablePlus. See [todos](#todos) for missing features. File an issue to suggest new ideas.
 
-### Connecting
+In the future, Planetsheet will give you (and your content editors) an interface as intuitive as Airtable and Google Sheets, while letting you (as a developer) use powerful databases underneath.
+
+## Usage
+
+```
+npx psheet
+```
+
+Make sure the `DATABASE_URL` environment variable is defined. Planetsheet should **just work**. If it doesn't, please file an issue!
+
+## Supported Databases
+
+- Postgres
+- MySql
+- SQLite (coming soon)
+
+## Sample connection strings
+
+Currently, Planetsheet uses built-in heuristics to add SSL query parameters for common database providers. You can view them here:
+
+### Planetscale
+
+```
+DATABASE_URL=mysql://0qnpifrkjmwv:pscale_pw***********************@asdfojklae.r.us-west-2.psdb.cloud/show?ssl=true
+```
+
+### Supabase
+
+```
+DATABASE_URL=postgresql://postgres:[YOUR-PASSWORD]@db.eegtiwadasfjibedlgk.supabase.co:5432/postgres
+```
+
+### Neon.tech
+
+```
+DATABASE_URL=postgres://lawrencecchen:[YOUR-PASSWORD]@prowl-read-4122469.cloud.neon.tech:5432/main?sslmode=require
+```
 
 ## Common errors
 
@@ -14,16 +50,20 @@ There's likely another process running on port 58337. Inspect using `lsof -i tcp
 
 ### Cannot connect
 
-Planetsheet uses knex internally. Look up how to connect to your database with your database ssl settings.
+Planetsheet uses knex internally. Look up how to connect to your database with your database's SSL settings.
 
-## todos
+## Todos
 
 - [ ] bottom action bar
   - [ ] content/structure/ddl
 - [ ] query editor
   - [ ] query history
-- [ ] redirect to /app/db when not found
+- [ ] redirect to /app/db when table/schema not found
 - [ ] better error handling
 - [ ] image previews
-  - [ ] image uploads (configurable to cloudflare, s3, etc)
+  - [ ] image uploads (configurable to cloudflare, s3, supabase s3, etc.)
 - [ ] relation selector
+
+## Future
+
+- Use [Bun](https://github.com/oven-sh/bun/issues/441) to bundle a standalone executable. Should have faster start up times, and (hopefully) ditch the hacky stuff happening in cli/cli.ts. Will also let us ditch node's sqlite3 + @mapbox/node-pre-gyp.
