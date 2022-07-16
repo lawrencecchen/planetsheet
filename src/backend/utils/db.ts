@@ -65,7 +65,7 @@ export async function getConnectionWithHeuristics(
   iMax = connectionStringHeuristics.length
 ): Promise<ReturnType<typeof getConnection>> {
   if (iTry === iMax) {
-    throw new Error("Invalid connection string.");
+    throw new Error("Could not connect to database.");
   }
   const _connectionString = connectionStringHeuristics[iTry](connectionString);
   const _connection = getConnection(_connectionString);
