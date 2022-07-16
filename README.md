@@ -65,6 +65,8 @@ Planetsheet uses knex internally. Look up how to connect to your database with y
 - [ ] relation selector
 - [ ] save database credentials
   - [ ] store db credentials in keychain. what's the windows/linux analogous service??
+- [ ] automatically kill other processes on port 58337?
+- [ ] sort user tables to top; move system tables into another accordion
 
 ## Future
 
