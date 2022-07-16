@@ -2,7 +2,7 @@
 
 A SQL editor designed for developers and content editors.
 
-Today, Planetsheet is an alternative to `npx prisma studio`, Postico, and TablePlus. See [todos](#todos) for missing features. File an issue to suggest new ideas.
+Today, Planetsheet is an (early) alternative to `npx prisma studio`, Postico, and TablePlus. See [todos](#todos) for missing features. File an issue to suggest new ideas.
 
 In the future, Planetsheet will give you (and your content editors) an interface as intuitive as Airtable and Google Sheets, while letting you (as a developer) use powerful databases underneath.
 
