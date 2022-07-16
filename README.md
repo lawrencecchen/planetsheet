@@ -17,7 +17,7 @@ Make sure the `DATABASE_URL` environment variable is defined. Planetsheet should
 ## Supported Databases
 
 - Postgres
-- MySql
+- MySQL
 - SQLite (coming soon)
 
 ## Sample connection strings
