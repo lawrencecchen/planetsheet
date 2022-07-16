@@ -63,6 +63,8 @@ Planetsheet uses knex internally. Look up how to connect to your database with y
 - [ ] image previews
   - [ ] image uploads (configurable to cloudflare, s3, supabase s3, etc.)
 - [ ] relation selector
+- [ ] save database credentials
+  - [ ] store db credentials in keychain. what's the windows/linux analogous service??
 
 ## Future
 
