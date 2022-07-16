@@ -52,6 +52,21 @@ There's likely another process running on port 58337. Inspect using `lsof -i tcp
 
 Planetsheet uses knex internally. Look up how to connect to your database with your database's SSL settings.
 
+## Development
+
+```
+npm install
+npm run dev
+```
+
+## Deployment
+
+```
+npm run build
+```
+
+Currently, Planetsheet is only tested with `npx psheet`. In the future, there should be a straighforward path towards self-hosting (Vercel/Railway/Docker).
+
 ## Todos
 
 - [ ] bottom action bar
