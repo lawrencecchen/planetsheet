@@ -101,6 +101,32 @@ export default function LeftPanel(props: {
             </Accordion.Content>
           </Accordion.Item>
         </Accordion.Root>
+        <a
+          href="https://github.com/lawrencecchen/planetsheet"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden items-center gap-2 cursor-pointer py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 md:flex"
+        >
+          <div className="text-brand-800 flex h-4 w-4 items-center justify-center">
+            <div className="text-scale-900 flex h-3 w-3 items-center justify-center transition-all group-hover:h-4 group-hover:w-4 group-hover:text-pink-900 group-focus:h-4 group-focus:w-4 group-focus:text-yellow-900">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width={14}
+                height={14}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className=""
+              >
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              </svg>
+            </div>
+          </div>
+          <span className="truncate">Star us on GitHub</span>
+        </a>
       </div>
     </div>
   );

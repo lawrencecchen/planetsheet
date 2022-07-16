@@ -22,7 +22,7 @@ Make sure the `DATABASE_URL` environment variable is defined. Planetsheet should
 
 ## Sample connection strings
 
-Currently, Planetsheet uses built-in heuristics to add SSL query parameters for common database providers. You can view them here:
+Currently, Planetsheet uses [simple custom heuristics](/src/backend/utils/db.ts) to add SSL query parameters for common database providers.
 
 ### Planetscale
 
