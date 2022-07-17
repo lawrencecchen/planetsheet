@@ -6,7 +6,7 @@ Today, Planetsheet is an (early) alternative to `npx prisma studio`, Postico, an
 
 In the future, Planetsheet will give you (and your content editors) an interface as intuitive as Airtable and Google Sheets, while letting you (as a developer) use powerful databases underneath.
 
-![Planetsheet demo screenshot](/assets/demo-screenshot.png)
+![Planetsheet demo screenshot](/assets/demo-screenshot-2.png)
 
 ## Usage
 
