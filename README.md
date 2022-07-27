@@ -71,6 +71,7 @@ Currently, Planetsheet is only tested with `npx psheet`. In the future, there sh
 
 ## Todos
 
+- [ ] more visible error handling
 - [ ] bottom action bar
   - [ ] content/structure/ddl
 - [ ] query editor
@@ -84,6 +85,7 @@ Currently, Planetsheet is only tested with `npx psheet`. In the future, there sh
   - [ ] store db credentials in keychain. what's the windows/linux analogous service??
 - [ ] automatically kill other processes on port 58337?
 - [ ] sort user tables to top; move system tables into another accordion
+- [ ] move away from glide grid for more control; create custom canvas grid.
 
 ## Future
 

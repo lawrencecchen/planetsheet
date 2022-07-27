@@ -17,12 +17,12 @@ const nextConfig = {
       {
         source: "/",
         destination: "/app/db",
-        permanent: true,
+        permanent: false,
       },
       {
         source: "/app",
         destination: "/app/db",
-        permanent: true,
+        permanent: false,
       },
     ];
   },
