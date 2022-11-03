@@ -1,0 +1,49 @@
+{
+  "name": "planetsheet",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "rakkas",
+    "build": "rakkas build",
+    "start": "node dist/server",
+    "format": "prettier --write --ignore-unknown src",
+    "test": "npm run test:typecheck && npm run test:format && npm run test:lint && npm run test:unit",
+    "test:typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:format": "prettier --check --ignore-unknown src",
+    "test:lint": "eslint . --ignore-pattern dist",
+    "test:unit": "vitest run"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.1.132",
+    "@rakkasjs/eslint-config": "0.6.4",
+    "@types/better-sqlite3": "^7.6.2",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@unocss/reset": "^0.46.3",
+    "eslint": "^8.26.0",
+    "prettier": "^2.7.1",
+    "rakkasjs": "0.6.4",
+    "typescript": "^4.8.4",
+    "unocss": "^0.46.3",
+    "vite": "^3.2.2",
+    "vite-tsconfig-paths": "^3.5.2",
+    "vitest": "^0.24.5"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^4.14.1",
+    "@tanstack/react-router": "^0.0.1-alpha.10",
+    "@tanstack/react-table": "^8.5.22",
+    "@tanstack/react-virtual": "3.0.0-beta.18",
+    "@trpc/client": "10.0.0-rc.3",
+    "@trpc/react-query": "10.0.0-rc.3",
+    "@trpc/server": "10.0.0-rc.3",
+    "better-sqlite3": "^7.6.2",
+    "dotenv": "^16.0.3",
+    "kysely": "^0.22.0",
+    "lucide-react": "^0.98.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "superjson": "^1.11.0",
+    "zod": "^3.19.1"
+  }
+}
